@@ -4,7 +4,7 @@ require "sinatra/auth/github/version"
 
 Gem::Specification.new do |s|
   s.name        = "GitHub-Reminders-Worker"
-  s.version     = Sinatra::Auth::Github::VERSION
+  s.version     = "1.0"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Stephen Russett"]
   s.email       = ["stephenrussett@gmail.com"]
@@ -13,21 +13,21 @@ Gem::Specification.new do |s|
   s.license     = ""
   s.description = s.summary
 
-  s.rubyforge_project = "sinatra_auth_github"
+  # s.rubyforge_project = "sinatra_auth_github"
 
-  s.add_dependency "sinatra",       "~>1.0"
-  s.add_dependency "warden-github", "~>1.0"
+  # s.add_dependency "sinatra",       "~>1.0"
+  # s.add_dependency "warden-github", "~>1.0"
   s.add_dependency "chronic_duration"
-  s.add_dependency "mongo"
-  s.add_dependency "bson_ext"
+  # s.add_dependency "mongo"
+  # s.add_dependency "bson_ext"
   # s.add_dependency "qless"
   s.add_dependency "i18n"
   s.add_dependency "tzinfo"
   s.add_dependency "activesupport", "~>3.0.0"
   s.add_dependency 'time_difference'
   # s.add_dependency 'octokit'
-  s.add_dependency "rack-flash3"
-  s.add_dependency 'newrelic_rpm'
+  # s.add_dependency "rack-flash3"
+  # s.add_dependency 'newrelic_rpm'
   s.add_dependency 'unicorn'
   s.add_dependency 'rake'
   s.add_dependency 'rest-client'
