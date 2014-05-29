@@ -3,12 +3,12 @@ $:.push File.expand_path("../lib", __FILE__)
 require "sinatra/auth/github/version"
 
 Gem::Specification.new do |s|
-  s.name        = "sinatra_auth_github"
+  s.name        = "GitHub-Reminders-Worker"
   s.version     = Sinatra::Auth::Github::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Stephen Russett"]
   s.email       = ["stephenrussett@gmail.com"]
-  s.homepage    = "http://github.com/StephenOTT/GitHub-Time-Tracking"
+  s.homepage    = "http://github.com/StephenOTT/GitHub-Reminders-Worker"
   s.summary     = ""
   s.license     = ""
   s.description = s.summary
@@ -40,8 +40,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "randexp",   "~>0.1.5"
   s.add_development_dependency "rack-test", "~>0.5.3"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  # s.files         = `git ls-files`.split("\n")
+  # s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  # s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  # s.require_paths = ["lib"]
 end
