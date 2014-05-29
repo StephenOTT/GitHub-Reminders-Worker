@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "sinatra/auth/github/version"
+# $:.push File.expand_path("../lib", __FILE__)
+# require "sinatra/auth/github/version"
 
 Gem::Specification.new do |s|
   s.name        = "GitHub-Reminders-Worker"
   s.version     = "1.0"
-  s.platform    = Gem::Platform::RUBY
+  # s.platform    = Gem::Platform::RUBY
   s.authors     = ["Stephen Russett"]
   s.email       = ["stephenrussett@gmail.com"]
   s.homepage    = "http://github.com/StephenOTT/GitHub-Reminders-Worker"
