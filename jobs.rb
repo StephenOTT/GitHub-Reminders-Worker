@@ -17,7 +17,7 @@ class SendEmail
 	rescue
 		puts "something went wrong when email was attempted"
 	end
-	  end
+  end
 end
 
 
