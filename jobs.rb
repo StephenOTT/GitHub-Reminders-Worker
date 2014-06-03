@@ -1,4 +1,7 @@
 require 'rest-client'
+require_relative 'reminder_validation/controller'
+require 'qless'
+require_relative 'mongo'
 
 class SendEmail
   def self.perform(job)
@@ -6,16 +9,16 @@ class SendEmail
 	# file = File.open("path-to-file.tar.gz", "txt")
 	# contents = file.read
 	begin
-		RestClient.post "https://api:key-6iqs3vfdn7pnkgxpj4ip4-1iyve-ljm3"\
-		"@api.mailgun.net/v2/sandbox7a90f2af1ae6406bbd6f4ef9cff652b3.mailgun.org/messages",
-		"from" => "GitHub Reminder <postmaster@sandbox7a90f2af1ae6406bbd6f4ef9cff652b3.mailgun.org>",
-		"to" => "Stephen Russett <stephenrussett@gmail.com>",
-		"subject" => "GitHub Reminder - #{Time.now}",
-		"text" => "This is a Github-Reminder"
+		RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}"\
+		"@#{ENV['MAILGUN_API_DOMAIN']}/messages",
+		"from" => "GitHub-Reminder <github-reminder-no-reply@#{ENV['MAILGUN_API_DOMAIN']}>",
+		"to" => job.data[:toEmail],
+		"subject" => job.data[:subject],
+		"text" => job.data[:body]
 
-		puts "email was sent"
+		puts "Reminder email has been sent"
 	rescue
-		puts "something went wrong when email was attempted"
+		puts "something went wrong when we tried to send the the reminder email"
 	end
   end
 end
@@ -24,15 +27,55 @@ end
 
 class CheckIfReminder
 	def self.preform(job)
+		# TODO rebuild this method so it chains multiple jobs together
+		commentAttrs = job.data[:comment].attrs
+		
+		if ReminderValidation.is_Reminder_Comment?(commentAttrs[:comment].attrs[:body]) == false
+			return "Not a Reminder Comment"
+		
+		elsif ReminderValidation.is_Reminder_Comment?(commentAttrs[:comment].attrs[:body]) == true
+			
+			# TODO Validation of Hook for Repo
+			# TODO Validation of Repo for user
+
+			# if hook and repo for user is validated then
+				userTimezone = nil # Get user's timezone from mongo
+				userToEmail = nil # Get user's selected email from mongo
+				calcDelay = nil # Calculate the number of seconds between the Comment Created_At DateTime and the Reminder DataTime
+				username = nil
+				repo = nil
+				tags = nil
 
 
+			parsedRemidner = ReminderValidation.process_request(job.data[:comment].attrs, userTimezone)	
+			
+
+
+			if parsedRemidner.class == Hash
+				generatedSubject = nil
+				generatedBody = nil
+
+				client = Qless::Client.new(:url => ENV["REDIS_URL"])
+				queue = client.queues['Email']
+				queue.put(SendEmail, {:toEmail => job.data[:toEmail],
+										:body => jobs.data[:body],
+										:subject => job.data[:subject]
+										}, 
+										:delay => job.data[:delay],
+										:tags => ["User|#{job.data[:username]}",
+												 "Repo|#{job.data[:username]}",
+												 "Issue|#{job.data[:issueNumber]}"])
+			end
+		end
+				
 	end
 end
 
 
 class ParseReminder
 	def self.preform(job)
-
+		# TODO add error handling based on reposes from process request/Parse_time_commit
+		ReminderValidation.process_request(job.data[:comment].attrs, userTimezone)
 
 	end
 end

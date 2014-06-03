@@ -21,7 +21,7 @@ require 'active_support/time'
 # 	Mongo_Connection.addReminder(data)
 # end
 
-module WebHook_Controller
+module ReminderValidation
 
 	def self.is_Reminder_Comment?(commentBody)
 		isReminderComment = Helpers.reminder_comment?(commentBody)
@@ -51,14 +51,14 @@ module WebHook_Controller
 		if parsedComment[0] != nil
 			workDate = Helpers.get_time_work_date(parsedComment[0], userTimezone)
 			if workDate != nil
-				parsedCommentHash["work_date"] = workDate
+				parsedCommentHash[:scheduled_date] = workDate
 			elsif workDate == nil
 				return puts "bad date syntax"
 			end
 		end
 
 		if parsedComment[1] != nil
-			parsedCommentHash["time_comment"] = Helpers.get_time_commit_comment(parsedComment[1])
+			parsedCommentHash[:time_comment] = Helpers.get_time_commit_comment(parsedComment[1])
 		end
 
 		return parsedCommentHash
@@ -68,16 +68,16 @@ module WebHook_Controller
 
 
 	def self.process_request(issueCommentEvent, userTimezone)	
-		repo = issueCommentEvent["repository"]["full_name"]
-		issueURL = issueCommentEvent["issue"]["html_url"]
-		issueTitle = issueCommentEvent["issue"]["title"]
-		issueState = issueCommentEvent["issue"]["state"]
-		comment = issueCommentEvent["comment"]["body"]
-		commentURL = issueCommentEvent["comment"]["html_url"]
-		commentCreated_At = issueCommentEvent["comment"]["created_at"]
+		repo = issueCommentEvent[:repository][:full_name]
+		issueURL = issueCommentEvent[:issue][:html_url]
+		issueTitle = issueCommentEvent[:issue][:title]
+		issueState = issueCommentEvent[:issue][:state]
+		comment = issueCommentEvent[:comment][:body]
+		commentURL = issueCommentEvent[:comment][:html_url]
+		commentCreated_At = issueCommentEvent[:comment][:created_at]
 		# timezoneOffset = "+05:00"
-		commentUserName = issueCommentEvent["comment"]["user"]["login"]
-		commentUserID = issueCommentEvent["comment"]["user"]["id"]
+		commentUserName = issueCommentEvent[:comment][:user][:login]
+		commentUserID = issueCommentEvent[:comment][:user][:id]
 
 		# puts repo
 		# puts issueURL
@@ -85,8 +85,15 @@ module WebHook_Controller
 		# puts issueState
 		# puts comment
 
-		Time.zone = userTimezone
-		Chronic.time_class = Time.zone
+		# TODO Add calculation for time difference between dateTIme posted
+		# and the future date time.
+
+		# TODO Add handling for a date that is in the past
+
+		# TODO add handling for a Un-parsable Date/Time
+
+		# Time.zone = userTimezone
+		# Chronic.time_class = Time.zone
 		# puts Chronic.parse(commentCreated_At).in_time_zone(userTimezone)
 		
 		# puts commentCreated_At
@@ -100,7 +107,7 @@ module WebHook_Controller
 		# puts parsedComment["work_date"]
 		# puts parsedComment["time_comment"]
 		
-		send_simple_message(parsedComment["work_date"], "Stephen Russett <stephenrussett@gmail.com>")
+		# send_simple_message(parsedComment["work_date"], "Stephen Russett <stephenrussett@gmail.com>")
 
 
 	end
