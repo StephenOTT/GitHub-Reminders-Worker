@@ -11,7 +11,7 @@ class SendEmail
 	# begin
 		puts "Attempting to send email"
 		RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}"\
-		"@#{ENV['MAILGUN_API_DOMAIN']}/messages",
+		"@api.mailgun.net/v2/samples.mailgun.org/messages",
 		"from" => "GitHub-Reminder <github-reminder-no-reply@#{ENV['MAILGUN_API_DOMAIN']}>",
 		"to" => "stephenrussett@gmail.com",
 		"subject" => "123",
