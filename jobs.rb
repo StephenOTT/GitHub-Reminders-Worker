@@ -13,9 +13,6 @@ class SendEmail
 		RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}"\
 		"@#{ENV['MAILGUN_API_DOMAIN']}/messages",
 		"from" => "GitHub-Reminder <github-reminder-no-reply@#{ENV['MAILGUN_API_DOMAIN']}>",
-		# "to" => job.data[:toEmail],
-		# "subject" => job.data[:subject],
-		# "text" => job.data[:body]
 		"to" => "stephenrussett@gmail.com",
 		"subject" => "123",
 		"text" => "123"
@@ -25,7 +22,9 @@ class SendEmail
 	end
   end
 end
-
+		# "to" => job.data[:toEmail],
+		# "subject" => job.data[:subject],
+		# "text" => job.data[:body]
 
 
 # class CheckIfReminder
@@ -66,11 +65,10 @@ end
 # 										}, 
 # 										:delay => job.data[:delay],
 # 										:tags => ["User|#{job.data[:username]}",
-# 												 "Repo|#{job.data[:username]}",
+# 												 "Repo|#{job.data[:repo]}",
 # 												 "Issue|#{job.data[:issueNumber]}"])
 # 			end
-# 		end
-				
+# 		end		
 # 	end
 # end
 
