@@ -8,7 +8,7 @@ class SendEmail
   	# Future code for loading html template
 	# file = File.open("path-to-file.tar.gz", "txt")
 	# contents = file.read
-	begin
+	# begin
 		puts "Attempting to send email"
 		RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}"\
 		"@#{ENV['MAILGUN_API_DOMAIN']}/messages",
@@ -17,9 +17,9 @@ class SendEmail
 		"subject" => "123",
 		"text" => "123"
 		puts "Reminder email has been sent"
-	rescue
-		puts "something went wrong when we tried to send the the reminder email"
-	end
+	# rescue
+		# puts "something went wrong when we tried to send the the reminder email"
+	# end
   end
 end
 		# "to" => job.data[:toEmail],
