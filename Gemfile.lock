@@ -7,16 +7,30 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.0.20)
+    bson (1.10.1)
+    chronic (0.10.2)
+    i18n (0.6.10)
     mime-types (2.3)
+    mongo (1.10.1)
+      bson (~> 1.10.1)
     rake (10.3.2)
     redis (3.0.7)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    thread_safe (0.3.4)
+    tzinfo (1.2.0)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport (~> 3.0.0)
+  chronic
+  i18n
+  mongo
   qless!
   rake
   rest-client
+  tzinfo

@@ -5,6 +5,11 @@ source "http://rubygems.org"
 gem "qless", :path => "./qless/qless-master"
 gem 'rest-client'
 gem 'rake'
+gem 'chronic'
+gem "activesupport", "~>3.0.0"
+gem "i18n"
+gem "tzinfo"
+gem "mongo"
 # gemspec
 
 # vim:ft=ruby
