@@ -10,6 +10,7 @@ gem "i18n", "0.6.9"
 gem "tzinfo"
 gem "activesupport", "~>3.0.0"
 gem "mongo"
+gem 'bson_ext'
 # gemspec
 
 # vim:ft=ruby

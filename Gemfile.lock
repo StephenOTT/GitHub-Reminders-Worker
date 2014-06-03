@@ -9,6 +9,8 @@ GEM
   specs:
     activesupport (3.0.20)
     bson (1.10.1)
+    bson_ext (1.10.1)
+      bson (~> 1.10.1)
     chronic (0.10.2)
     i18n (0.6.9)
     mime-types (2.3)
@@ -27,6 +29,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 3.0.0)
+  bson_ext
   chronic
   i18n (= 0.6.9)
   mongo
