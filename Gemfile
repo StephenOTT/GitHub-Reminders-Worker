@@ -6,9 +6,9 @@ gem "qless", :path => "./qless/qless-master"
 gem 'rest-client'
 gem 'rake'
 gem 'chronic'
-gem "activesupport", "~>3.0.0"
 gem "i18n"
 gem "tzinfo"
+gem "activesupport", "~>3.0.0"
 gem "mongo"
 # gemspec
 
