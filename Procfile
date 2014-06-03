@@ -1,3 +1,3 @@
 
 
-worker: bundle exec rake qless:work --trace
+worker: bundle exec rake qless:work
