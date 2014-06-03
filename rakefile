@@ -13,17 +13,17 @@ require 'qless/tasks'
 # end
 
 
-# namespace :qless do
-#   task :setup do
-#     require_relative 'jobs' # to ensure all job classes are loaded
+namespace :qless do
+  task :setup do
+    # require_relative 'jobs' # to ensure all job classes are loaded
 
-#     # Set options via environment variables
-#     # The only required option is QUEUES; the
-#     # rest have reasonable defaults.
-#     ENV['REDIS_URL'] ||= 'redis://localhost:6379'
-#     ENV['QUEUES'] ||= 'testing'
-#   end
-# end
+    # Set options via environment variables
+    # The only required option is QUEUES; the
+    # rest have reasonable defaults.
+    ENV['REDIS_URL'] ||= 'redis://localhost:6379'
+    # ENV['QUEUES'] ||= 'testing'
+  end
+end
 
 namespace :qless do
   task :work do

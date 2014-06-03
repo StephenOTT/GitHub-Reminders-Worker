@@ -9,6 +9,7 @@ class SendEmail
 	# file = File.open("path-to-file.tar.gz", "txt")
 	# contents = file.read
 	begin
+		puts "Attempting to send email"
 		RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}"\
 		"@#{ENV['MAILGUN_API_DOMAIN']}/messages",
 		"from" => "GitHub-Reminder <github-reminder-no-reply@#{ENV['MAILGUN_API_DOMAIN']}>",
