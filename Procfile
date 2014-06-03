@@ -1,3 +1,3 @@
 
 
-web: bundle exec rake qless:work
+worker: bundle exec rake qless:work
