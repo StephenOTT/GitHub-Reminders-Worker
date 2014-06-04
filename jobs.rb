@@ -10,8 +10,8 @@ class SendEmail
 	# contents = file.read
 	# begin
 		puts "Attempting to send email"
-		RestClient.post "https://api:key-43xkdn1jpryhsievgkk3zsg6q49xmc58"\
-		"@api.mailgun.net/v2/samples.mailgun.org/messages",
+		RestClient.post "https://api:#{ENV["MAILGUN_API_KEY"]}"\
+		"@api.mailgun.net/v2/#{ENV["MAILGUN_API_DOMAIN"]}/messages",
 		"from" => "GitHub-Reminder <github-reminder-no-reply@samples.mailgun.org>",
 		"to" => "stephenrussett@gmail.com",
 		"subject" => "123",
