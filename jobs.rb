@@ -15,6 +15,7 @@ class SendEmail
 		"to" => job.data[:toEmail],
 		"subject" => job.data[:subject],
 		"text" => job.data[:body]
+		
 	# rescue
 		# puts "something went wrong when we tried to send the the reminder email"
 	# end
