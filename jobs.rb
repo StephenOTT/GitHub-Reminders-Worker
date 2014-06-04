@@ -9,22 +9,18 @@ class SendEmail
 	# file = File.open("path-to-file.tar.gz", "txt")
 	# contents = file.read
 	# begin
-		puts "Attempting to send email"
 		RestClient.post "https://api:#{ENV["MAILGUN_API_KEY"]}"\
 		"@api.mailgun.net/v2/#{ENV["MAILGUN_API_DOMAIN"]}/messages",
 		"from" => "GitHub-Reminder <github-reminder-no-reply@samples.mailgun.org>",
-		"to" => "stephenrussett@gmail.com",
-		"subject" => "123",
-		"text" => "123"
-		puts "Reminder email has been sent"
+		"to" => job.data[:toEmail],
+		"subject" => job.data[:subject],
+		"text" => job.data[:body]
 	# rescue
 		# puts "something went wrong when we tried to send the the reminder email"
 	# end
   end
 end
-		# "to" => job.data[:toEmail],
-		# "subject" => job.data[:subject],
-		# "text" => job.data[:body]
+
 
 
 # class CheckIfReminder
