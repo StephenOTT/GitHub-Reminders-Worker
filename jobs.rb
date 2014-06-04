@@ -55,7 +55,7 @@ class CheckIfReminder
 				generatedBody = nil
 
 				client = Qless::Client.new(:url => ENV["REDIS_URL"])
-				queue = client.queues['Email']
+				queue = client.queues['testing']
 				queue.put(SendEmail, {:toEmail => job.data["toEmail"] ||= "stephenrussett@gmail.com",
 										:body => jobs.data["body"] ||= "Test Body",
 										:subject => job.data["subject"] ||= "TestSubject"
