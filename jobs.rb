@@ -25,7 +25,7 @@ end
 
 
 class CheckIfReminder
-	def self.preform(job)
+	def self.perform(job)
 		# TODO rebuild this method so it chains multiple jobs together
 		commentAttrs = job.data[:comment].attrs
 		
