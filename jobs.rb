@@ -12,10 +12,10 @@ class SendEmail
 		RestClient.post "https://api:#{ENV["MAILGUN_API_KEY"]}"\
 		"@api.mailgun.net/v2/#{ENV["MAILGUN_API_DOMAIN"]}/messages",
 		"from" => "GitHub-Reminder <github-reminder-no-reply@samples.mailgun.org>",
-		"to" => job.data[:toEmail],
-		"subject" => job.data[:subject],
-		"text" => job.data[:body]
-		
+		"to" => job.data["toEmail"],
+		"subject" => job.data["subject"],
+		"text" => job.data["body"]
+
 	# rescue
 		# puts "something went wrong when we tried to send the the reminder email"
 	# end
