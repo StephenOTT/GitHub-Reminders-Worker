@@ -11,6 +11,7 @@ gem "tzinfo"
 gem "activesupport", "~>3.0.0"
 gem "mongo"
 gem 'bson_ext'
+gem "json"
 # gemspec
 
 # vim:ft=ruby
