@@ -36,7 +36,7 @@ class MongoQueries
 
 
 		def self.aggregate(input)
-			Sinatra_Helpers.mongo_connection
+			self.mongo_connection
 			Mongo_Connection.aggregate(input)
 		end
 
