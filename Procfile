@@ -1,3 +1,3 @@
 
 
-worker: bundle exec rake qless:work
+worker: bundle exec run:detached rake qless:work
