@@ -24,7 +24,7 @@ class SendEmail
 end
 
 class MongoQueries
-		
+
 		def self.mongo_connection(clearCollections = false)
 			Mongo_Connection.mongo_Connect("localhost", 27017, ENV['MONGO_DB_NAME'], ENV['MONGO_DB_COLL_NAME'])
 
@@ -32,8 +32,6 @@ class MongoQueries
 			Mongo_Connection.clear_mongo_collections
 			end
 		end
-
-
 
 		def self.aggregate(input)
 			self.mongo_connection
