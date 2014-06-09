@@ -127,7 +127,7 @@ class CheckIfReminder
 		
 
 
-		commentData = job.data["comment"]
+		commentData = JSON.parse(job.data["comment"])
 			commentBody = commentData["comment"]["body"]
 			userid = commentData["comment"]["user"]["id"]
 
