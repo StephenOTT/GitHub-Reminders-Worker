@@ -1,3 +1,3 @@
 
 
-worker: detached bundle exec rake qless:work
+worker: bundle exec ruby runme.rb
