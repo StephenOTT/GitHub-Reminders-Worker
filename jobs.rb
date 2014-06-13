@@ -3,6 +3,7 @@ require_relative 'reminder_validation/controller'
 require 'qless'
 require_relative 'mongo'
 require 'json'
+require 'logger'
 
 class SendEmail
   def self.perform(job)
@@ -116,34 +117,28 @@ class MongoQueries
 
 end
 
-
-
-
 class CheckIfReminder
 	def self.perform(job)
 		# TODO rebuild this method so it chains multiple jobs together
 		
 
-
 		commentData = JSON.parse(job.data["comment"])
-			commentBody = commentData["comment"]["body"]
-			userid = commentData["comment"]["user"]["id"]
+		commentBody = commentData["comment"]["body"]
+		userid = commentData["comment"]["user"]["id"]
 
-			issueNumber = commentData["issue"]["number"]
-			issueTitle = commentData["issue"]["title"]
-			commentID = commentData["comment"]["id"]
-			repoName = commentData["repository"]["name"]
-			repoFullName = commentData["repository"]["full_name"]
-
-
+		issueNumber = commentData["issue"]["number"]
+		issueTitle = commentData["issue"]["title"]
+		commentID = commentData["comment"]["id"]
+		repoName = commentData["repository"]["name"]
+		repoFullName = commentData["repository"]["full_name"]
 
 
-			# if hook and repo for user is validated then
-				
-				calcDelay = nil # Calculate the number of seconds between the Comment Created_At DateTime and the Reminder DataTime
-				username = nil
-				repo = nil
-				tags = nil
+		# if hook and repo for user is validated then
+			
+		calcDelay = nil # Calculate the number of seconds between the Comment Created_At DateTime and the Reminder DataTime
+		username = nil
+		repo = nil
+		tags = nil
 
 
 		isReminderTF = ReminderValidation.is_Reminder_Comment?(commentBody)
