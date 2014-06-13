@@ -151,12 +151,12 @@ class CheckIfReminder
 
 
 			hookExistsTF = MongoQueries.reminder_hook_exists_in_mongo?(userid, repoFullName)
-			if hookExistsTF == true
+			# if hookExistsTF == true
 
 
 				userExistsTF = MongoQueries.user_exists?(userid)
 
-				if userExistsTF == true
+				# if userExistsTF == true
 					userProfile = MongoQueries.get_user_profile(userid)
 						userTimezone = userProfile["timezone"]
 						userToEmail = userProfile["email"]
@@ -165,12 +165,12 @@ class CheckIfReminder
 
 					# Validates that the user who created the comment has the repo registered
 					repoRegisteredTF = MongoQueries.repo_registered?(userid, repoFullName)
-					if repoRegisteredTF == true
+					# if repoRegisteredTF == true
 					# TODO Validation of Hook for Repo
 
 						parsedRemidner = ReminderValidation.process_request(commentData, userTimezone)	
 						
-						if parsedRemidner.class == Hash
+						# if parsedRemidner.class == Hash
 							generatedSubject = nil
 							generatedBody = nil
 
@@ -185,17 +185,17 @@ class CheckIfReminder
 													# 		 "Repo|#{job.data['repo']}",
 													# 		 "Issue|#{job.data['issueNumber']}"]
 													)
-						end
-					elsif repoRegisteredTF == false
-						puts "user did not have the repo registered"		
-					end
-				elsif userExistsTF == false
-					puts "user does not have a account"
-				end
+						# end
+					# elsif repoRegisteredTF == false
+					# 	puts "user did not have the repo registered"		
+					# end
+				# elsif userExistsTF == false
+				# 	puts "user does not have a account"
+				# end
 
-			elsif hookExistsTF == false
-				puts "hook does not exist"
-			end
+			# elsif hookExistsTF == false
+			# 	puts "hook does not exist"
+			# end
 
 		end
 	end
