@@ -168,7 +168,7 @@ class CheckIfReminder
 					if repoRegisteredTF == true
 					# TODO Validation of Hook for Repo
 
-						parsedRemidner = ReminderValidation.process_request(job.data[:comment].attrs, userTimezone)	
+						parsedRemidner = ReminderValidation.process_request(commentData, userTimezone)	
 						
 						if parsedRemidner.class == Hash
 							generatedSubject = nil
