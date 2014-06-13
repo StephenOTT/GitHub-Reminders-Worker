@@ -70,7 +70,7 @@ module ReminderValidation
 
 	def self.process_request(issueCommentEvent, userTimezone)	
 		repo = issueCommentEvent["repository"]["full_name"]
-		issueURL = issueCommentEven["issue"]["html_url"]
+		issueURL = issueCommentEvent["issue"]["html_url"]
 		issueTitle = issueCommentEvent["issue"]["title"]
 		issueState = issueCommentEvent["issue"]["state"]
 		comment = issueCommentEvent["comment"]["body"]
