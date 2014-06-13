@@ -53,7 +53,8 @@ module ReminderValidation
 			if workDate != nil
 				parsedCommentHash[:scheduled_date] = workDate
 			elsif workDate == nil
-				return puts "bad date syntax"
+				parsedCommentHash[:scheduled_date] = "bad work date"
+				# return puts "bad date syntax"
 			end
 		end
 
@@ -68,16 +69,16 @@ module ReminderValidation
 
 
 	def self.process_request(issueCommentEvent, userTimezone)	
-		repo = issueCommentEvent[:repository][:full_name]
-		issueURL = issueCommentEvent[:issue][:html_url]
-		issueTitle = issueCommentEvent[:issue][:title]
-		issueState = issueCommentEvent[:issue][:state]
-		comment = issueCommentEvent[:comment][:body]
-		commentURL = issueCommentEvent[:comment][:html_url]
-		commentCreated_At = issueCommentEvent[:comment][:created_at]
+		repo = issueCommentEvent["repository"]["full_name"]
+		issueURL = issueCommentEven["issue"]["html_url"]
+		issueTitle = issueCommentEvent["issue"]["title"]
+		issueState = issueCommentEvent["issue"]["state"]
+		comment = issueCommentEvent["comment"]["body"]
+		commentURL = issueCommentEvent["comment"]["html_url"]
+		commentCreated_At = issueCommentEvent["comment"]["created_at"]
 		# timezoneOffset = "+05:00"
-		commentUserName = issueCommentEvent[:comment][:user][:login]
-		commentUserID = issueCommentEvent[:comment][:user][:id]
+		commentUserName = issueCommentEvent["comment"]["user"]["login"]
+		commentUserID = issueCommentEvent["comment"]["user"]["id"]
 
 		# puts repo
 		# puts issueURL
