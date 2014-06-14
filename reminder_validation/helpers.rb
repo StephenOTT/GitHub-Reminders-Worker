@@ -7,13 +7,14 @@ module Helpers
 		return Accepted_Emoji.accepted_reminder_emoji
 	end
 
-	def self.get_time_work_date(parsedTimeComment, userTimezone)
+	def self.get_time_work_date(parsedTimeComment, userTimezone, commentCreated_At)
 		# userTimezone sample: Eastern Time (US & Canada) -05:00
 		# We strip out the space and -05:00 from the end of the string.
 		Time.zone = userTimezone[0..-8]
 		Chronic.time_class = Time.zone
-		return Chronic.parse(parsedTimeComment)
+		return Chronic.parse(parsedTimeComment, :now => Chronic.parse(commentCreated_At))
 	end
+	# Chronic.parse('may 27th', :now => Time.local(2000, 1, 1))
 
 	def self.parse_billable_time_comment(timeComment, timeEmoji)
 		return timeComment.gsub("#{timeEmoji} ","").split(" | ")
