@@ -173,21 +173,26 @@ class CheckIfReminder
 						parsedReminder = ReminderValidation.process_request(commentData, userTimezone)	
 						
 						if parsedReminder.class == Hash
-							generatedSubject = nil
-							generatedBody = nil
+							# generatedSubject = nil
+							# generatedBody = nil
 							delayTime = parsedReminder[:scheduled_date].to_f - Time.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').utc.to_f
+							reminderDateTime = parsedReminder[:scheduled_date]
+							reminderComment = parsedReminder[:time_comment] ||= "No Comment"
 
 
 
-
-							template = File.read("./email_templates/reminder.html.erb")
-							template = Erubis::Eruby.new(template)
-							emailBody = template.result(:issueNumber => issueNumber,
+							emailTemplate = File.read("./email_templates/reminder.html.erb")
+							emailTemplate = Erubis::Eruby.new(emailTemplate)
+							emailBody = emailTemplate.result(:issueNumber => issueNumber,
 														:issueTitle => issueTitle,
 														:commentID => commentID,
-														:repoFullName => repoFullName)
-
-
+														:commentBody => commentBody,
+														:commentCreated_At => commentCreated_At,
+														:repoFullName => repoFullName,
+														:repoName => repoName,
+														:reminderDateTime => reminderDateTime,
+														:reminderComment => reminderComment,
+														)
 
 
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
@@ -195,7 +200,7 @@ class CheckIfReminder
 							queue.put(SendEmail, {:toEmail => userToEmail,
 													:body => emailBody,
 													# :body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At},  #{Time.now}",
-													:subject => "GitHub-Reminder"
+													:subject => "GitHub-Reminder: #{repoFullName} issue: #{issueNumber}"
 													}, 
 													:delay => delayTime,
 													# :tags => ["User|#{job.data['username']}",

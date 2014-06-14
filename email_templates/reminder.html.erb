@@ -54,14 +54,18 @@
 
             <!-- ### BEGIN CONTENT ### -->
             <div style="font-weight: bold; font-size: 18px; line-height: 24px; color: #D03C0F">
-            GitHub-Reminder
+            Your Reminder
             </div><br>
 
-            <%= issueNumber %><br>
-            <%= issueTitle %><br>
-            <%= commentID %><br>
-            <%= repoFullName %>
-
+            Issue Number: <%= issueNumber %><br>
+            Issue Title: <%= issueTitle %><br>
+            CommentID: <%= commentID %><br>
+            CommentBody: <%= commentBody %><br>
+            Comment Created At: <%= commentCreated_At %><br>
+            Repository Full Name: <%= repoFullName %><br>
+            Repository Name: <%= repoName %><br>
+            Scheduled Reminder Time(UTC) <%= reminderDateTime %><br>
+            Reminder Comment: <%= ReminderComment %><br>
             <br><br>
 
 
