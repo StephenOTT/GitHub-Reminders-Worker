@@ -357,4 +357,4 @@ rawDataValue = {
 # gh_authenticate("USERNAME", "PASSWORD")
 # create_gh_hook("StephenOTT/Test1")
 # puts get_gh_user_emails.map {|email| email[:email]} 
-puts ReminderValidation.process_request(rawDataValue, "Eastern Time (US & Canada) -05:00")
+# puts ReminderValidation.process_request(rawDataValue, "Eastern Time (US & Canada) -05:00")
