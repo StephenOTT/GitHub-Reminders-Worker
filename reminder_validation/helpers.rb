@@ -12,10 +12,8 @@ module Helpers
 		# We strip out the space and -05:00 from the end of the string.
 		Time.zone = userTimezone[0..-8]
 		Chronic.time_class = Time.zone
-		return Chronic.parse(parsedTimeComment, :now => Time.local(2000, 1, 1))
-		# return Chronic.parse(parsedTimeComment, :now => Chronic.parse(commentCreated_At))
+		return Chronic.parse(parsedTimeComment, :now => Chronic.parse(commentCreated_At))
 	end
-	# Chronic.parse('may 27th', :now => Time.local(2000, 1, 1))
 
 	def self.parse_billable_time_comment(timeComment, timeEmoji)
 		return timeComment.gsub("#{timeEmoji} ","").split(" | ")
