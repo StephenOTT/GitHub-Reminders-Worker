@@ -76,7 +76,7 @@ module ReminderValidation
 		comment = issueCommentEvent["comment"]["body"]
 		commentURL = issueCommentEvent["comment"]["html_url"]
 		commentCreated_At = issueCommentEvent["comment"]["created_at"]
-		timezoneOffset = "US/Eastern"
+		# timezoneOffset = "US/Eastern"
 		commentUserName = issueCommentEvent["comment"]["user"]["login"]
 		commentUserID = issueCommentEvent["comment"]["user"]["id"]
 
@@ -103,8 +103,8 @@ module ReminderValidation
 
 		# puts is_Reminder_Comment?(comment)
 		
-		parsedComment = parse_time_commit(comment, timezoneOffset)
-		# parsedComment = parse_time_commit(comment, userTimezone)
+		# parsedComment = parse_time_commit(comment, timezoneOffset)
+		parsedComment = parse_time_commit(comment, userTimezone[0..-7])
 		
 		# puts parsedComment["work_date"]
 		# puts parsedComment["time_comment"]
