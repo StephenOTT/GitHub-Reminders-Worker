@@ -192,6 +192,9 @@ class CheckIfReminder
 														:repoName => repoName,
 														:reminderDateTime => reminderDateTime,
 														:reminderComment => reminderComment,
+														:userTimezone => userTimezone,
+														:userName => userName,
+														:userToEmail => userToEmail,
 														)
 
 
