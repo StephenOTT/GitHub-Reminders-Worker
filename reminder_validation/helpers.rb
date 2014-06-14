@@ -8,7 +8,7 @@ module Helpers
 	end
 
 	def self.get_time_work_date(parsedTimeComment, userTimezone)
-		Time.zone = userTimezone
+		Time.zone = userTimezone[0..-6]
 		Chronic.time_class = Time.zone
 		return Chronic.parse(parsedTimeComment)
 	end

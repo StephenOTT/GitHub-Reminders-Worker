@@ -104,7 +104,7 @@ module ReminderValidation
 		# puts is_Reminder_Comment?(comment)
 		
 		# parsedComment = parse_time_commit(comment, timezoneOffset)
-		parsedComment = parse_time_commit(comment, userTimezone[0..-7])
+		parsedComment = parse_time_commit(comment, userTimezone)
 		
 		# puts parsedComment["work_date"]
 		# puts parsedComment["time_comment"]
