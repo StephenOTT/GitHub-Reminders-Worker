@@ -17,7 +17,7 @@ module Helpers
 		
 		nowDateTime = DateTime.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').in_time_zone(userTimezone[0..-8])
 		# nowDateTime = DateTime.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').in_time_zone(userTimezone[0..-8])
-		reminderDateTime = Chronic.parse(parsedTimeComment, :now => nowDateTime)
+		reminderDateTime = Chronic.parse(parsedTimeComment, :now => nowDateTime).utc
 		return reminderDateTime
 	end
 
