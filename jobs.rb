@@ -174,6 +174,8 @@ class CheckIfReminder
 						if parsedReminder.class == Hash
 							generatedSubject = nil
 							generatedBody = nil
+							delayTime = parsedReminder[:scheduled_date].to_f - Time.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').utc.to_f
+
 
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
@@ -181,7 +183,7 @@ class CheckIfReminder
 													:body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At},  #{Time.now}",
 													:subject => "GitHub-Reminder"
 													}, 
-													:delay => 0,
+													:delay => delayTime,
 													# :tags => ["User|#{job.data['username']}",
 													# 		 "Repo|#{job.data['repo']}",
 													# 		 "Issue|#{job.data['issueNumber']}"]
