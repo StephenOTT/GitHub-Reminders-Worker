@@ -182,7 +182,10 @@ class CheckIfReminder
 
 							template = File.read("./email_templates/reminder.html.erb")
 							template = Erubis::Eruby.new(template)
-							emailBody = template.result(:your_variable => "sample123")
+							emailBody = template.result(:issueNumber => issueNumber,
+														:issueTitle => issueTitle,
+														:commentID => commentID,
+														:repoFullName => repoFullName)
 
 
 
