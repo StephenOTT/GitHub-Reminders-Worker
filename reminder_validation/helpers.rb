@@ -15,9 +15,9 @@ module Helpers
 		# created_at_time = Time.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z')
 		# onetwo = created_at_time.zone_offset(commentCreated_At.split(//).last(7).join)
 		
-		nowDateTime = DateTime.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z')
+		nowDateTime = DateTime.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').utc
 		# nowDateTime = DateTime.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').in_time_zone(userTimezone[0..-8])
-		reminderDateTime = Chronic.parse(parsedTimeComment, :now => nowDateTime).utc
+		reminderDateTime = Chronic.parse(parsedTimeComment, :now => nowDateTime)
 		return reminderDateTime
 	end
 
