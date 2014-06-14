@@ -49,7 +49,7 @@ module ReminderValidation
 		end
 
 		if parsedComment[0] != nil
-			workDate = Helpers.get_time_work_date(parsedComment[0], userTimezone)
+			workDate = Helpers.get_time_work_date(parsedComment[0], userTimezone, commentCreated_At)
 			if workDate != nil
 				parsedCommentHash[:scheduled_date] = workDate
 			elsif workDate == nil
