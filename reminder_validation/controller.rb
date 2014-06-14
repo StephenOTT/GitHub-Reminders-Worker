@@ -76,7 +76,7 @@ module ReminderValidation
 		comment = issueCommentEvent["comment"]["body"]
 		commentURL = issueCommentEvent["comment"]["html_url"]
 		commentCreated_At = issueCommentEvent["comment"]["created_at"]
-		timezoneOffset = "+05:00"
+		timezoneOffset = "US/Eastern"
 		commentUserName = issueCommentEvent["comment"]["user"]["login"]
 		commentUserID = issueCommentEvent["comment"]["user"]["id"]
 
@@ -357,4 +357,4 @@ rawDataValue = {
 # gh_authenticate("USERNAME", "PASSWORD")
 # create_gh_hook("StephenOTT/Test1")
 # puts get_gh_user_emails.map {|email| email[:email]} 
-# process_request(rawDataValue, "US/Eastern")
+# ReminderValidation.process_request(rawDataValue, "US/Eastern")
