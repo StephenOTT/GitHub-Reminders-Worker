@@ -125,6 +125,7 @@ class CheckIfReminder
 		commentData = JSON.parse(job.data["comment"])
 		commentBody = commentData["comment"]["body"]
 		userid = commentData["comment"]["user"]["id"]
+		commentCreated_At = commentData["comment"]["created_at"]
 
 		issueNumber = commentData["issue"]["number"]
 		issueTitle = commentData["issue"]["title"]
@@ -177,7 +178,7 @@ class CheckIfReminder
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
 							queue.put(SendEmail, {:toEmail => userToEmail,
-													:body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder}",
+													:body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At}",
 													:subject => "GitHub-Reminder"
 													}, 
 													:delay => 0,
