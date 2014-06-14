@@ -4,6 +4,7 @@ require 'qless'
 require_relative 'mongo'
 require 'json'
 require 'logger'
+require 'erubis'
 
 class SendEmail
   def self.perform(job)
@@ -16,7 +17,7 @@ class SendEmail
 		"from" => "GitHub-Reminder <github-reminder-no-reply@samples.mailgun.org>",
 		"to" => job.data["toEmail"],
 		"subject" => job.data["subject"],
-		"text" => job.data["body"]
+		"html" => job.data["body"]
 
 	# rescue
 		# puts "something went wrong when we tried to send the the reminder email"
@@ -177,10 +178,20 @@ class CheckIfReminder
 							delayTime = parsedReminder[:scheduled_date].to_f - Time.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').utc.to_f
 
 
+
+
+							template = File.read("./email_templates/reminder.html.erb")
+							template = Erubis::Eruby.new(template)
+							emailBody = template.result(:your_variable => "sample123")
+
+
+
+
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
 							queue.put(SendEmail, {:toEmail => userToEmail,
-													:body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At},  #{Time.now}",
+													:body => emailBody,
+													# :body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At},  #{Time.now}",
 													:subject => "GitHub-Reminder"
 													}, 
 													:delay => delayTime,
