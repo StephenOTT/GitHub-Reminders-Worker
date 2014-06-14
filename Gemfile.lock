@@ -12,6 +12,7 @@ GEM
     bson_ext (1.10.1)
       bson (~> 1.10.1)
     chronic (0.10.2)
+    erubis (2.7.0)
     i18n (0.6.9)
     json (1.8.1)
     mime-types (2.3)
@@ -32,6 +33,7 @@ DEPENDENCIES
   activesupport (~> 3.0.0)
   bson_ext
   chronic
+  erubis
   i18n (<= 0.6.9)
   json
   mongo
