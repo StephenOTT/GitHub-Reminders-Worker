@@ -27,7 +27,7 @@ module ReminderValidation
 		isReminderComment = Helpers.reminder_comment?(commentBody)
 	end
 
-	def self.parse_time_commit(timeComment, userTimezone)
+	def self.parse_time_commit(timeComment, userTimezone, commentCreated_At)
 		acceptedClockEmoji = Helpers.get_Reminder_Emoji
 
 		parsedCommentHash = {}
@@ -104,7 +104,7 @@ module ReminderValidation
 		# puts is_Reminder_Comment?(comment)
 		
 		# parsedComment = parse_time_commit(comment, timezoneOffset)
-		parsedComment = parse_time_commit(comment, userTimezone)
+		parsedComment = parse_time_commit(comment, userTimezone, commentCreated_At)
 		
 		# puts parsedComment["work_date"]
 		# puts parsedComment["time_comment"]
