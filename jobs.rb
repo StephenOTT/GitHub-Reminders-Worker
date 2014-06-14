@@ -177,7 +177,7 @@ class CheckIfReminder
 							# generatedBody = nil
 							delayTime = parsedReminder[:scheduled_date].to_f - Time.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').utc.to_f
 							reminderDateTime = parsedReminder[:scheduled_date]
-							reminderComment = parsedReminder[:time_comment] ||= "No Comment"
+							reminderComment = parsedReminder[:time_comment]
 
 
 
