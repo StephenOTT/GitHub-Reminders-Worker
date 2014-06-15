@@ -14,7 +14,7 @@ class SendEmail
 	# begin
 		RestClient.post "https://api:#{ENV["MAILGUN_API_KEY"]}"\
 		"@api.mailgun.net/v2/#{ENV["MAILGUN_API_DOMAIN"]}/messages",
-		"from" => "GitHub-Reminder <github-reminder-no-reply@samples.mailgun.org>",
+		"from" => "GitHub-Reminder <github-reminder-no-reply@github-reminders.com>",
 		"to" => job.data["toEmail"],
 		"subject" => job.data["subject"],
 		"html" => job.data["body"]
@@ -120,8 +120,8 @@ end
 
 class CheckIfReminder
 	def self.perform(job)
-		# TODO rebuild this method so it chains multiple jobs together
-		
+		# TODO Rebuld this methid as it is WAY to big and to many 
+		# components are in this single method		
 
 		commentData = JSON.parse(job.data["comment"])
 		commentBody = commentData["comment"]["body"]
@@ -137,10 +137,10 @@ class CheckIfReminder
 
 		# if hook and repo for user is validated then
 			
-		calcDelay = nil # Calculate the number of seconds between the Comment Created_At DateTime and the Reminder DataTime
-		username = nil
-		repo = nil
-		tags = nil
+		# calcDelay = nil # Calculate the number of seconds between the Comment Created_At DateTime and the Reminder DataTime
+		# username = nil
+		# repo = nil
+		# tags = nil
 
 
 		isReminderTF = ReminderValidation.is_Reminder_Comment?(commentBody)
