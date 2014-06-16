@@ -99,7 +99,7 @@ class MongoQueries
 		def self.reminder_hook_exists_in_mongo?(userid, repo)
 			repo = repo.downcase
 			hooks = self.aggregate([
-									{ "$match" => {userid: userid}},
+									# { "$match" => {userid: userid}},
 									{ "$unwind" => "$registered_hooks"},
 									# { "$project" => {"registered_hooks.repo" => {"$toLower"=>"$registered_hooks.repo"}}},
 									{ "$match" => {"registered_hooks.repo" => repo}}
