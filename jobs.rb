@@ -98,6 +98,7 @@ class MongoQueries
 		# Checks mongoDB for registered hooks for the user.
 		def self.reminder_hook_exists_in_mongo?(userid, repo)
 			repo = repo.downcase
+			# TODO add logic for checking is repo exists regardless of whether they are owner of webhook
 			hooks = self.aggregate([
 									# { "$match" => {userid: userid}},
 									{ "$unwind" => "$registered_hooks"},
