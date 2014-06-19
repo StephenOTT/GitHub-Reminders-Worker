@@ -207,6 +207,7 @@ class CheckIfReminder
 													:subject => "GitHub-Reminder: #{repoFullName} issue: #{issueNumber}"
 													}, 
 													:delay => delayTime,
+													:tags => job.tags
 													# :tags => ["User|#{job.data['username']}",
 													# 		 "Repo|#{job.data['repo']}",
 													# 		 "Issue|#{job.data['issueNumber']}"]
