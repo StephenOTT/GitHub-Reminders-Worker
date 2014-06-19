@@ -179,7 +179,7 @@ class CheckIfReminder
 							reminderComment = parsedReminder[:time_comment]
 
 
-
+							# TODO Move Email Template Rendering into its own method so it can be called by the Web app
 							emailTemplate = File.read("./email_templates/reminder.html.erb")
 							emailTemplate = Erubis::Eruby.new(emailTemplate)
 							emailBody = emailTemplate.result(:issueNumber => issueNumber,
@@ -199,6 +199,7 @@ class CheckIfReminder
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
 							queue.put(SendEmail, { :parentValidationJobId => job.jid,
+													:scheduledDateTime => reminderDateTime.to_f,
 													:toEmail => userToEmail,
 													:body => emailBody,
 													:subject => "GitHub-Reminder: #{repoFullName} issue: #{issueNumber}"
