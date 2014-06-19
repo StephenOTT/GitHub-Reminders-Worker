@@ -206,7 +206,7 @@ class CheckIfReminder
 
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
-							queue.put(SendEmail, { :parentValidationJobId => job.jid,
+							emailJID = queue.put(SendEmail, { :parentValidationJobId => job.jid,
 													:toEmail => userToEmail,
 													:body => emailBody,
 													# :body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At},  #{Time.now}",
@@ -218,6 +218,7 @@ class CheckIfReminder
 													# 		 "Repo|#{job.data['repo']}",
 													# 		 "Issue|#{job.data['issueNumber']}"]
 													)
+							job.data(:generatedEmailJob => emailJID)
 						end
 					elsif repoRegisteredTF == false
 						puts "user did not have the repo registered"		
