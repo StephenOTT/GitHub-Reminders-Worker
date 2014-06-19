@@ -207,6 +207,10 @@ class CheckIfReminder
 													:delay => delayTime,
 													:tags => job.tags
 													)
+						else
+							# TODO Send Email saying that the reminder syntax failed / bad syntax.
+							puts "Bad Reminder Syntax.  Reminder Syntax Parse did not return hash"
+
 						end
 					elsif repoRegisteredTF == false
 						puts "user did not have the repo registered"		
