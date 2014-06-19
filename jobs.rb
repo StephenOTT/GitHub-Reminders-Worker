@@ -115,8 +115,6 @@ class MongoQueries
 				return "Something went wrong...duplicate registered hook records have been found...."		
 			end
 		end
-
-
 end
 
 class CheckIfReminder
@@ -135,18 +133,14 @@ class CheckIfReminder
 		repoName = commentData["repository"]["name"]
 		repoFullName = commentData["repository"]["full_name"]
 
-			job.tag("UserID=#{commentData["comment"]["user"]["id"]}",
-			 "FullRepoName=#{commentData["repository"]["full_name"].downcase}",
-			 "UserAndRepo=#{commentData["comment"]["user"]["id"]}/#{commentData["repository"]["full_name"].downcase}"
-			 )
-
-
-		# if hook and repo for user is validated then
-			
-		# calcDelay = nil # Calculate the number of seconds between the Comment Created_At DateTime and the Reminder DataTime
-		# username = nil
-		# repo = nil
-		# tags = nil
+		job.tag("UserID=#{userid}",
+				"FullRepoName=#{repoFullName.downcase}",
+				"issueNumber=#{issueNumber}",
+				"commentNumber=#{commentID}",
+				"UserAndRepo=#{userid}/#{repoFullName.downcase}",
+				"UserAndRepoAndIssue=#{userid}/#{repoFullName.downcase}/#{issueNumber}",
+				"UserAndRepoAndIssueAndComment=#{userid}/#{repoFullName.downcase}/#{issueNumber}/#{commentID}",
+				)
 
 
 		isReminderTF = ReminderValidation.is_Reminder_Comment?(commentBody)
@@ -179,8 +173,7 @@ class CheckIfReminder
 						parsedReminder = ReminderValidation.process_request(commentData, userTimezone)	
 						
 						if parsedReminder.class == Hash
-							# generatedSubject = nil
-							# generatedBody = nil
+
 							delayTime = parsedReminder[:scheduled_date].to_f - Time.strptime(commentCreated_At, '%Y-%m-%dT%H:%M:%S%z').utc.to_f
 							reminderDateTime = parsedReminder[:scheduled_date]
 							reminderComment = parsedReminder[:time_comment]
@@ -206,19 +199,14 @@ class CheckIfReminder
 
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
-							emailJID = queue.put(SendEmail, { :parentValidationJobId => job.jid,
+							queue.put(SendEmail, { :parentValidationJobId => job.jid,
 													:toEmail => userToEmail,
 													:body => emailBody,
-													# :body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At},  #{Time.now}",
 													:subject => "GitHub-Reminder: #{repoFullName} issue: #{issueNumber}"
 													}, 
 													:delay => delayTime,
 													:tags => job.tags
-													# :tags => ["User|#{job.data['username']}",
-													# 		 "Repo|#{job.data['repo']}",
-													# 		 "Issue|#{job.data['issueNumber']}"]
 													)
-							job.data(:generatedEmailJob => emailJID)
 						end
 					elsif repoRegisteredTF == false
 						puts "user did not have the repo registered"		
