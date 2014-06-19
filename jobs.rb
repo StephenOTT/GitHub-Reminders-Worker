@@ -196,7 +196,6 @@ class CheckIfReminder
 														:userToEmail => userToEmail,
 														)
 
-
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
 							queue.put(SendEmail, { :parentValidationJobId => job.jid,
@@ -205,7 +204,13 @@ class CheckIfReminder
 													:subject => "GitHub-Reminder: #{repoFullName} issue: #{issueNumber}"
 													}, 
 													:delay => delayTime,
-													:tags => job.tags
+													:tags => ["UserID=#{userid}",
+																"FullRepoName=#{repoFullName.downcase}",
+																"issueNumber=#{issueNumber}",
+																"commentNumber=#{commentID}",
+																"UserAndRepo=#{userid}/#{repoFullName.downcase}",
+																"UserAndRepoAndIssue=#{userid}/#{repoFullName.downcase}/#{issueNumber}",
+																"UserAndRepoAndIssueAndComment=#{userid}/#{repoFullName.downcase}/#{issueNumber}/#{commentID}",]
 													)
 						else
 							# TODO Send Email saying that the reminder syntax failed / bad syntax.
