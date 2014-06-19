@@ -201,7 +201,8 @@ class CheckIfReminder
 
 							client = Qless::Client.new(:url => ENV["REDIS_URL"])
 							queue = client.queues['testing']
-							queue.put(SendEmail, {:toEmail => userToEmail,
+							queue.put(SendEmail, { :parentValidationJobId => job.jid
+													:toEmail => userToEmail,
 													:body => emailBody,
 													# :body => "My timezone is #{userTimezone}, My issueNumber: #{issueNumber}, My Issue Title: #{issueTitle}, My Comment ID: #{commentID}, My Repo Name: #{repoName}, My Full Repo Name: #{repoFullName},    #{parsedReminder},  Comment Created At:  #{commentCreated_At},  #{Time.now}",
 													:subject => "GitHub-Reminder: #{repoFullName} issue: #{issueNumber}"
