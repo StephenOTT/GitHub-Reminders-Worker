@@ -135,6 +135,11 @@ class CheckIfReminder
 		repoName = commentData["repository"]["name"]
 		repoFullName = commentData["repository"]["full_name"]
 
+			job.tag("UserID=#{commentData["comment"]["user"]["id"]}",
+			 "FullRepoName=#{commentData["repository"]["full_name"].downcase}",
+			 "UserAndRepo=#{commentData["comment"]["user"]["id"]}/#{commentData["repository"]["full_name"].downcase}"
+			 )
+
 
 		# if hook and repo for user is validated then
 			
